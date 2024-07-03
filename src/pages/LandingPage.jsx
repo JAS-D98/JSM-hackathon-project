@@ -10,12 +10,14 @@ import { Autoplay, Pagination,} from 'swiper/modules';
 
 import InputSection from '../components/InputSection/InputSection'
 import { Landingsliders } from '../data/LandingPageSlider';
-import { wave } from '../assets/images';
+import { aboutimage1, aboutimage2, wave } from '../assets/images';
 import { GiTeacher } from "react-icons/gi";
 import CtaCard from '../components/cta/CtaCard';
 import { FaSchoolFlag } from "react-icons/fa6";
+import { FaArrowCircleRight } from "react-icons/fa";
 import { LiaSchoolSolid } from "react-icons/lia";
 import { IoSchoolSharp } from "react-icons/io5";
+import Button from '../components/button/Button';
 
 
 export default function LandingPage() {
@@ -65,6 +67,20 @@ export default function LandingPage() {
        <CtaCard icon={<IoSchoolSharp />} label="Universities"/>
         </div>
       {/* end of cta section */}
+
+      {/* start of about us section */}
+      <div className='flex flex-col md:flex-row mt-20 px-20'>
+        <div className='mx-auto w-1/2 justify-center items-center'>
+          <img src={aboutimage1} alt="Some stationery"  className='w-[10em] md:w-[15em] ml-32 shadow-md' />
+          <img src={aboutimage2} alt="Some stationery" className='w-[10em] md:w-[15em] -mt-32 shadow-md'/>
+        </div>
+        <div className='w-full mt-6 md:mt-0 md:w-1/2 text-center flex flex-col items-center'>
+            <h2 className='text-primaryBlackColor font-bold md:text-4xl'>GET <span className='text-primaryBlueColor'>TO KNOW</span> Us</h2>
+            <p className='text-secondaryBlackColor text-sm md:text-xl mt-5'>We are committed to helping you find your find the perfect educational environment and are striving to be your trusted resource in securing a bright and successful future for your child. Choose us as your go-to source for reliable school information and rankings.</p>
+            <a href="/about-us"><Button title="Read More" backgroundColor="primaryBlueColor" icon={<FaArrowCircleRight />}/></a>
+        </div>
+      </div>
+      {/* end of about us section */}
     
     </>
   )

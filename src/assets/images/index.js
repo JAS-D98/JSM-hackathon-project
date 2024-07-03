@@ -9,4 +9,6 @@ import schoolboy from "./schoolboy.png";
 import university from "./university.jpg";
 import universitylady from "./universitylady.png";
 import wave from "./wave.svg";
-export { logo, facebook, twitter, instagram, avatar, kindergarten, schoolsmine, schoolboy, university , universitylady, wave};
+import aboutimage1 from "./aboutimage1.svg";
+import aboutimage2 from "./aboutimage2.svg";
+export { logo, facebook, twitter, instagram, avatar, kindergarten, schoolsmine, schoolboy, university , universitylady, wave, aboutimage1, aboutimage2};
