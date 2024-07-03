@@ -41,8 +41,8 @@ function Navbar() {
           <IoSearch />
         </div>
         <div className="flex items-center gap-2">
-          <Button title="Login" />
-          <Button title="Sign Up" backgroundColor="bg-primary" border="border" />
+          <Button title="Login" marginTop="0"/>
+          <Button title="Sign Up" backgroundColor="bg-primary" border="border" marginTop="0"/>
         </div>
       </div>
     </div>

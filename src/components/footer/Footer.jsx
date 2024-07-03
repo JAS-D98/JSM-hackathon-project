@@ -62,7 +62,7 @@ export default function Footer() {
               className="outline-none rounded p-2"
               placeholder="Enter your email address here"
             />
-            <Button title="Subscribe" border="border" />
+            <Button title="Subscribe" border="border" marginTop="0"/>
           </form>
         </div>
         <div className="w-1/3 mt-8 md:mt-0">

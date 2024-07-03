@@ -11,4 +11,10 @@ import universitylady from "./universitylady.png";
 import wave from "./wave.svg";
 import aboutimage1 from "./aboutimage1.svg";
 import aboutimage2 from "./aboutimage2.svg";
-export { logo, facebook, twitter, instagram, avatar, kindergarten, schoolsmine, schoolboy, university , universitylady, wave, aboutimage1, aboutimage2};
+import waveUp from "./waveUp.svg";
+import testimonialStudent from "./testimonialStudent.png"
+import testimonialTeacher from "./testimonialTeacher.png"
+import testimonialPrincipal from "./testimonialPrincipal.png"
+import testimonialParent from "./testimonialParent.png"
+
+export { logo, facebook, twitter, instagram, avatar, kindergarten, schoolsmine, schoolboy, university , universitylady, wave, aboutimage1, aboutimage2, waveUp, testimonialStudent, testimonialTeacher, testimonialPrincipal, testimonialParent};
