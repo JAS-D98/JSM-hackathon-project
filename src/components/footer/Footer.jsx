@@ -5,7 +5,7 @@ import Button from "../button/Button.jsx";
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-16 bg-footer text-white mt-16 dark:bg-secondaryBlueColor">
+    <footer className="py-8 px-16 bg-footer text-white mt-16 bg-secondaryBlueColor">
       <div className="flex justify-between items-start gap-20 flex-wrap max-lg:flex-col">
         <div className="flex flex-col items-start">
           <a href="/">
