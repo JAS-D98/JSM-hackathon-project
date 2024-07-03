@@ -6,6 +6,7 @@ import TextArea from "../components/TextArea/TextArea";
 import ContactUsMessage from "../components/contactUsMessage/ContactUsMessage";
 import Button from "../components/button/Button";
 import { avatar } from "../assets/images";
+import { MdOutlineMail, MdOutlinePhoneInTalk, MdOutlineMessage  } from "react-icons/md";
 
 function ContactUsPage() {
   return (
@@ -46,7 +47,7 @@ function ContactUsPage() {
               <FormInput
                 InputType="email"
                 Labelname="Email Address"
-                InputIcon={<FaUserEdit />}
+                InputIcon={<MdOutlineMail />}
                 InputId="Email Address"
                 InputName="Email Address"
                 placeholderText="Enter your email address here"
@@ -54,7 +55,7 @@ function ContactUsPage() {
               <FormInput
                 InputType="number"
                 Labelname="Phone Number"
-                InputIcon={<FaUserEdit />}
+                InputIcon={<MdOutlinePhoneInTalk />}
                 InputId="Phone Number"
                 InputName="Phone Number"
                 placeholderText="Enter your phone number here e.g +254706..."
@@ -67,7 +68,7 @@ function ContactUsPage() {
             <div className="flex justify-between">
               <TextArea
                 Labelname="Message"
-                InputIcon={<FaUserEdit />}
+                InputIcon={<MdOutlineMessage />}
                 InputName="Contact Message"
                 placeholderText="Enter your message here"
                 InputId="Contact Message"
