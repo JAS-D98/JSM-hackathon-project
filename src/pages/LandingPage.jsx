@@ -5,14 +5,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
-
 // import required modules
 import { Autoplay, Pagination,} from 'swiper/modules';
 
 import InputSection from '../components/InputSection/InputSection'
 import { Landingsliders } from '../data/LandingPageSlider';
 import { wave } from '../assets/images';
+import { GiTeacher } from "react-icons/gi";
+import CtaCard from '../components/cta/CtaCard';
+import { FaSchoolFlag } from "react-icons/fa6";
+import { LiaSchoolSolid } from "react-icons/lia";
+import { IoSchoolSharp } from "react-icons/io5";
+
 
 export default function LandingPage() {
   return (
@@ -51,7 +55,14 @@ export default function LandingPage() {
 
       {/* start of cta section */}
         <div className='w-full text-center'>
-          <h2 className='text-primaryBlueColor  font-bold text-2xl'>ELEVATE <span className='text-primaryBlackColor'>YOUR</span> LEARNING</h2>
+          <h2 className='text-primaryBlueColor  font-bold md:text-4xl'>ELEVATE <span className='text-primaryBlackColor'>YOUR</span> LEARNING</h2>
+          <p className='text-secondaryBlackColor text-sm md:text-xl'>This platform supports schools of different categories as listed below</p>
+        </div>
+        <div className='px-20 flex items-center flex-wrap justify-center gap-3 mt-8 md:gap-10'>
+       <CtaCard icon={<GiTeacher />} label="Kindergartens"/>
+       <CtaCard icon={<LiaSchoolSolid/>} label="Primary Schools"/>
+       <CtaCard icon={<FaSchoolFlag />} label="High Schools"/>
+       <CtaCard icon={<IoSchoolSharp />} label="Universities"/>
         </div>
       {/* end of cta section */}
     
