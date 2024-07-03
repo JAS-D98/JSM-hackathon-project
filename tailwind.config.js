@@ -9,6 +9,7 @@ export default {
         secondaryBlueColor: "#0A8ED9",
         tertiaryBlueColor:"#e7f4fb",
         primaryBlackColor: "#1E1E1E",
+        blackGradient:"#00000080",
         secondaryBlackColor: "#1E1E1E",
         primaryWhiteColor: "#FFFFFF",
       },

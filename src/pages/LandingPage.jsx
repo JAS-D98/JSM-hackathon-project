@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 // import required modules
-import { Autoplay, Pagination, Navigation} from 'swiper/modules';
+import { Autoplay, Pagination} from 'swiper/modules';
 
 import InputSection from '../components/InputSection/InputSection'
 import { Landingsliders } from '../data/LandingPageSlider';
@@ -23,7 +23,6 @@ import EvidenceCard from '../components/evidencecard/EvidenceCard';
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import TestimonialCard from '../components/testimonial/TestimonialCard';
-import { testimonialSliders } from '../data/TestimonialSlider';
 
 export default function LandingPage() {
    const [swiperRef, setSwiperRef] = useState(null);
@@ -137,23 +136,6 @@ export default function LandingPage() {
           </Swiper>
         </div>
       </div>
-      {/* <div className='px-20 bg-tertiaryBlueColor'>
-      <Swiper
-        onSwiper={setSwiperRef}
-        slidesPerView={1}
-        centeredSlides={true}
-        spaceBetween={30}
-        pagination={{
-          type: 'bullets',
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-          <SwiperSlide><TestimonialCard title="parent" image={testimonialParent} alt="A Parent" name="Mary Anne Wambui" message="This app gave me a platform to have my child enrolled in one of the best schools I could afford."/></SwiperSlide>
-          <SwiperSlide><TestimonialCard title="parent" image={testimonialParent} alt="A Parent" name="Mary Anne Wambui" message="This app gave me a platform to have my child enrolled in one of the best schools I could afford."/></SwiperSlide>
-      </Swiper>
-      </div> */}
       {/* end of testimonial section */}
     
     </>
