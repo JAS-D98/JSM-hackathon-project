@@ -13,7 +13,7 @@ function Navbar() {
       document.body.classList.toggle("dark");
   }
   return (
-    <div className="w-full fixed">
+    <div className="w-full fixed z-20">
       <div className="text-primaryWhiteColor font-poppins w-full md:w-[90%] md:mt-4 mx-auto bg-primaryBlueColor p-3 md:rounded-xl flex items-center justify-between">
         <img src={logo} alt="logo icon" className="w-16" />
         <nav className="items-center gap-4 hidden md:flex">
