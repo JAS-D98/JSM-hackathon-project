@@ -18,7 +18,7 @@ export default function ArticlesPage() {
         </div>
       </div>
        <div>
-       <h1 className='text-primaryBlackColor font-bold text-2xl md:text-4xl'>Articles Written</h1>
+       <h1 className='text-primaryBlackColor font-bold text-center md:text-start text-2xl md:text-4xl'>Articles Written</h1>
        {articles.map((article, i)=>(
         <div className='border shadow-xl rounded-xl mt-4 p-4'>
           <h1 className='font-semibold text-secondaryBlackColor uppercase'><span className='text-primaryBlueColor'>Title: </span>{article.title}</h1>

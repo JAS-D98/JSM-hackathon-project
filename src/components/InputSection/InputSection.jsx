@@ -6,7 +6,7 @@ export default function InputSection({formAction ,inputPlaceHolder, btnTitle, bt
     <form action={formAction} className="flex items-center gap-2 text-secondaryBlackColor">
         <input
         type="text"
-        className="outline-none rounded p-2"
+        className="outline-none rounded p-1 md:p-2"
         placeholder={inputPlaceHolder}
         required
         />
