@@ -14,9 +14,34 @@ import aboutimage2 from "./aboutimage2.svg";
 import waveUp from "./waveUp.svg";
 import blueWave from "./blueWave.svg";
 import blueWaveDown from "./blueWaveDown.svg";
-import testimonialStudent from "./testimonialStudent.png"
-import testimonialTeacher from "./testimonialTeacher.png"
-import testimonialPrincipal from "./testimonialPrincipal.png"
-import testimonialParent from "./testimonialParent.png"
+import testimonialStudent from "./testimonialStudent.png";
+import testimonialTeacher from "./testimonialTeacher.png";
+import testimonialPrincipal from "./testimonialPrincipal.png";
+import testimonialParent from "./testimonialParent.png";
+import coloredimage from "./coloredimage.png";
+import readingavatar from "./readingavatar.png";
 
-export { logo, facebook, twitter, instagram, avatar, kindergarten, schoolsmine, schoolboy, university , universitylady, wave, aboutimage1, aboutimage2, waveUp, testimonialStudent, testimonialTeacher, testimonialPrincipal, testimonialParent, blueWave, blueWaveDown};
+export {
+  logo,
+  facebook,
+  twitter,
+  instagram,
+  avatar,
+  kindergarten,
+  schoolsmine,
+  schoolboy,
+  university,
+  universitylady,
+  wave,
+  aboutimage1,
+  aboutimage2,
+  waveUp,
+  testimonialStudent,
+  testimonialTeacher,
+  testimonialPrincipal,
+  testimonialParent,
+  blueWave,
+  blueWaveDown,
+  coloredimage,
+  readingavatar
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { navLinks } from "../../data/Navigation";
-import { IoMoonOutline, IoSearch, IoSunny  } from "react-icons/io5";
+import { IoMoonOutline, IoSearch, IoSunny } from "react-icons/io5";
 import Button from "../button/Button";
 import { logo } from "../../assets/images";
 
@@ -9,9 +9,9 @@ function Navbar() {
   const [dark, setDark] = React.useState(false);
 
   const darkModeHandler = () => {
-      setDark(!dark);
-      document.body.classList.toggle("dark");
-  }
+    setDark(!dark);
+    document.body.classList.toggle("dark");
+  };
   return (
     <div className="w-full fixed z-20">
       <div className="text-primaryWhiteColor font-poppins w-full md:w-[90%] md:mt-4 mx-auto bg-primaryBlueColor p-3 md:rounded-xl flex items-center justify-between">
@@ -28,21 +28,20 @@ function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-6 text-xl cursor-pointer">
-          <span onClick={()=> darkModeHandler()}>
-          {
-            
-            dark && <IoSunny />
-          }
-          {
-              !dark &&  <IoMoonOutline/>
-          }
-        
+          <span onClick={() => darkModeHandler()}>
+            {dark && <IoSunny />}
+            {!dark && <IoMoonOutline />}
           </span>
           <IoSearch />
         </div>
         <div className="flex items-center gap-2">
-          <Button title="Login" marginTop="0"/>
-          <Button title="Sign Up" backgroundColor="bg-primary" border="border" marginTop="0"/>
+          <Button title="Login" marginTop="0" />
+          <Button
+            title="Sign Up"
+            backgroundColor="bg-primary"
+            border="border"
+            marginTop="0"
+          />
         </div>
       </div>
     </div>

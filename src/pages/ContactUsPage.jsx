@@ -6,7 +6,11 @@ import TextArea from "../components/TextArea/TextArea";
 import ContactUsMessage from "../components/contactUsMessage/ContactUsMessage";
 import Button from "../components/button/Button";
 import { avatar } from "../assets/images";
-import { MdOutlineMail, MdOutlinePhoneInTalk, MdOutlineMessage  } from "react-icons/md";
+import {
+  MdOutlineMail,
+  MdOutlinePhoneInTalk,
+  MdOutlineMessage,
+} from "react-icons/md";
 
 function ContactUsPage() {
   return (

@@ -56,13 +56,16 @@ export default function Footer() {
           <h3 className="font-medium mb-1 text-xl text-center md:text-start">
             Subscribe to our newsletter
           </h3>
-          <form action="" className="flex items-center gap-2 text-secondaryBlackColor">
+          <form
+            action=""
+            className="flex items-center gap-2 text-secondaryBlackColor"
+          >
             <input
               type="text"
               className="outline-none rounded p-2"
               placeholder="Enter your email address here"
             />
-            <Button title="Subscribe" border="border" marginTop="0"/>
+            <Button title="Subscribe" border="border" marginTop="0" />
           </form>
         </div>
         <div className="w-1/3 mt-8 md:mt-0">
