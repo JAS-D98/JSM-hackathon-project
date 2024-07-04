@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../components/button/Button";
 import { FaEdit } from "react-icons/fa";
 import { articles } from "../data/Articles";
+import { Link } from "react-router-dom";
 
 export default function ArticlesPage() {
   return (
@@ -15,7 +16,7 @@ export default function ArticlesPage() {
             Read and also share a brief article about your schooling experience
             which you feel can be of help to foster learning
           </p>
-          <Button title="Write An Article" border="border" icon={<FaEdit />} />
+          <Link to="/articles-write"><Button title="Write An Article" border="border" icon={<FaEdit />} /></Link>
         </div>
       </div>
       <div>

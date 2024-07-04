@@ -7,7 +7,8 @@ import ArticlesPage from "./pages/ArticlesPage";
 import SchoolsPage from "./pages/SchoolsPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/footer/Footer";
-import WriteArticlesPage from "./pages/WriteArticlesPage";
+import AddSchoolsPage from "./pages/AddSchoolsPage";
+import WriteArticlesPage from "./pages/writeArticlesPage";
 
 export default function App() {
   return (
@@ -19,8 +20,9 @@ export default function App() {
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/schools" element={<SchoolsPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
-          <Route path="/articles-write" element={<WriteArticlesPage />} />
+          <Route path="/articles-write" element={<WriteArticlesPage/>} />
           <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/schools-register" element={<AddSchoolsPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

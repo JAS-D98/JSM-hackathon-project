@@ -14,7 +14,7 @@ export const footerLinks = [
     title: "Links",
     links: [
       { name: "Write Article", link: "/articles" },
-      { name: "Register Your School", link: "/schools" },
+      { name: "Register Your School", link: "/schools-register" },
     ],
   },
   {
