@@ -137,13 +137,13 @@ export default function AboutUsPage() {
             <Link to="/contact-us">
               <Button title="Contact Us" backgroundColor="primaryBlueColor" />
             </Link>
-            <Link to="/articles">
+            <Link to="/articles-write">
               <Button
                 title="Write An Article"
                 backgroundColor="primaryBlueColor"
               />
             </Link>
-            <Link to="/schools">
+            <Link to="/schools-register">
               <Button
                 title="Register School"
                 backgroundColor="primaryBlueColor"
