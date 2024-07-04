@@ -130,7 +130,7 @@ export default function AboutUsPage() {
             how to get students excited about learning, a strategy you recently
             tried that didn’t quite work out and how you changed / an Aha!
             moment that led you to rethink how you teach a particular
-            subject/lesson? If so, you’re in the right place. Write to us a n
+            subject/lesson? If so, you’re in the right place. Write to us an
             article and we’ll get to showcase it to millions of users.
           </p>
           <div className="flex flex-col md:flex-row items-center gap-3 flex-wrap">

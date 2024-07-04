@@ -68,7 +68,7 @@ function AddSchoolsPage() {
               <FormInput
                 InputType="text"
                 Labelname="LinkedIn"
-                InputIcon={<FaLinkedin/>}
+                InputIcon={<FaLinkedin />}
                 InputId="LinkedIn"
                 InputName="LinkedIn Link(Optional)"
                 placeholderText="Enter schools linkedIn link here"
@@ -83,7 +83,8 @@ function AddSchoolsPage() {
               />
             </div>
             <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
-              <span className="text-primaryBlueColor">0.2</span> About the school
+              <span className="text-primaryBlueColor">0.2</span> About the
+              school
             </h1>
             <div className="flex flex-col md:flex-row justify-between">
               <TextArea
@@ -109,7 +110,7 @@ function AddSchoolsPage() {
           </form>
         </div>
 
-        <div className="w-full mt-8 md:mt-0 md:w-1/3 h-full text-center flex flex-col justify-center items-center text-secondaryBlackColor">
+        <div className="w-full mb-6 md:w-1/3 h-full text-center flex flex-col justify-center items-center text-secondaryBlackColor">
           <h1 className="text-2xl font-semibold text-primaryBlackColor">
             CONTACT US
           </h1>

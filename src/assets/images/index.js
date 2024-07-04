@@ -20,6 +20,7 @@ import testimonialPrincipal from "./testimonialPrincipal.png";
 import testimonialParent from "./testimonialParent.png";
 import coloredimage from "./coloredimage.png";
 import readingavatar from "./readingavatar.png";
+import lostavatar from "./lostavatar.png";
 
 export {
   logo,
@@ -43,5 +44,6 @@ export {
   blueWave,
   blueWaveDown,
   coloredimage,
-  readingavatar
+  readingavatar,
+  lostavatar,
 };

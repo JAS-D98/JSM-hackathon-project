@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function ArticlesPage() {
   return (
-    <div className="px-20">
+    <div className="px-10 md:px-20">
       <div className="w-full h-[80vh] flex items-center justify-center flex-col">
         <div className="bg-primaryBlueColor w-full rounded-xl text-center p-4 flex flex-col items-center">
           <h1 className="font-bold text-2xl md:text-6xl text-primaryWhiteColor capitalize text-center">
@@ -16,7 +16,13 @@ export default function ArticlesPage() {
             Read and also share a brief article about your schooling experience
             which you feel can be of help to foster learning
           </p>
-          <Link to="/articles-write"><Button title="Write An Article" border="border" icon={<FaEdit />} /></Link>
+          <Link to="/articles-write">
+            <Button
+              title="Write An Article"
+              border="border"
+              icon={<FaEdit />}
+            />
+          </Link>
         </div>
       </div>
       <div>
@@ -24,7 +30,7 @@ export default function ArticlesPage() {
           Articles Written
         </h1>
         {articles.map((article, i) => (
-          <div className="border shadow-xl rounded-xl mt-4 p-4">
+          <div className="border shadow-xl rounded-xl mt-4 p-4" key={i}>
             <h1 className="font-semibold text-secondaryBlackColor uppercase">
               <span className="text-primaryBlueColor">Title: </span>
               {article.title}

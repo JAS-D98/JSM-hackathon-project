@@ -9,6 +9,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/footer/Footer";
 import AddSchoolsPage from "./pages/AddSchoolsPage";
 import ArticlesPageWrite from "./pages/ArticlesPageWrite";
+import PageNotFound from "./pages/PageNotFound";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/articles-write" element={<ArticlesPageWrite />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/schools-register" element={<AddSchoolsPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
