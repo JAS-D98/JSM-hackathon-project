@@ -8,7 +8,7 @@ import SchoolsPage from "./pages/SchoolsPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import Footer from "./components/footer/Footer";
 import AddSchoolsPage from "./pages/AddSchoolsPage";
-import WriteArticlesPage from "./pages/writeArticlesPage";
+import ArticlesPageWrite from "./pages/ArticlesPageWrite";
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/schools" element={<SchoolsPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
-          <Route path="/articles-write" element={<WriteArticlesPage/>} />
+          <Route path="/articles-write" element={<ArticlesPageWrite />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/schools-register" element={<AddSchoolsPage />} />
         </Routes>
