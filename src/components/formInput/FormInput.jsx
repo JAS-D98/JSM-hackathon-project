@@ -7,6 +7,7 @@ export default function FormInput({
   InputName,
   InputId,
   placeholderText,
+  required
 }) {
   return (
     <div className="text-[.6em] w-full md:w-[48%] text-2xl ">
@@ -24,7 +25,7 @@ export default function FormInput({
           id={InputId}
           name={InputName}
           min="0"
-          required
+          required={required}
         />
       </div>
     </div>

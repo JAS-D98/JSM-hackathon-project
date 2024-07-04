@@ -42,6 +42,7 @@ export default function ArticlesPageWrite() {
                 InputId="Name"
                 InputName="Name"
                 placeholderText="Enter your name here"
+                required="required"
               />
               {/* <FormInput
                 InputType="text"
@@ -58,6 +59,7 @@ export default function ArticlesPageWrite() {
                 InputId="Email Address"
                 InputName="Email Address"
                 placeholderText="Enter your email address here"
+                required="required"
               />
             </div>
             <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
@@ -71,6 +73,7 @@ export default function ArticlesPageWrite() {
                 InputName="Article Message"
                 placeholderText="Type your article here"
                 InputId="Article Message"
+                required="required"
               />
               <img
                 src={readingavatar}

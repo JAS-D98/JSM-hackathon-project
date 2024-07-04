@@ -40,6 +40,7 @@ function AddSchoolsPage() {
                 InputId="School Name"
                 InputName="School Name"
                 placeholderText="Enter the name of your school here"
+                required="required"
               />
               <FormInput
                 InputType="text"
@@ -48,6 +49,7 @@ function AddSchoolsPage() {
                 InputId="School Location"
                 InputName="School Location"
                 placeholderText="Enter the location of your school here"
+                required="required"
               />
               <FormInput
                 InputType="email"
@@ -56,6 +58,7 @@ function AddSchoolsPage() {
                 InputId="Email Address"
                 InputName="Email Address"
                 placeholderText="Enter email address for the school here"
+                required="required"
               />
               <FormInput
                 InputType="number"
@@ -64,6 +67,7 @@ function AddSchoolsPage() {
                 InputId="Phone Number"
                 InputName="Phone Number"
                 placeholderText="Enter schools phone number here e.g +254706..."
+                required="required"
               />
               <FormInput
                 InputType="text"
@@ -93,6 +97,7 @@ function AddSchoolsPage() {
                 InputName="About School"
                 placeholderText="Give a brief description of the school"
                 InputId="About"
+                required="required"
               />
               <TextArea
                 Labelname="Vision"
@@ -100,6 +105,7 @@ function AddSchoolsPage() {
                 InputName="School Vision"
                 placeholderText="Enter a the schools vision"
                 InputId="School Vision"
+                required="required"
               />
             </div>
             <Button

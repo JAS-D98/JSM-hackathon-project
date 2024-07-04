@@ -39,6 +39,7 @@ function ContactUsPage() {
                 InputId="First Name"
                 InputName="First Name"
                 placeholderText="Enter your first name here"
+                required="required"
               />
               <FormInput
                 InputType="text"
@@ -47,6 +48,7 @@ function ContactUsPage() {
                 InputId="Last Name"
                 InputName="Last Name"
                 placeholderText="Enter your last name here"
+                required="required"
               />
               <FormInput
                 InputType="email"
@@ -55,6 +57,7 @@ function ContactUsPage() {
                 InputId="Email Address"
                 InputName="Email Address"
                 placeholderText="Enter your email address here"
+                required="required"
               />
               <FormInput
                 InputType="number"
@@ -63,6 +66,7 @@ function ContactUsPage() {
                 InputId="Phone Number"
                 InputName="Phone Number"
                 placeholderText="Enter your phone number here e.g +254706..."
+                required="required"
               />
             </div>
             <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
@@ -76,13 +80,13 @@ function ContactUsPage() {
                 InputName="Contact Message"
                 placeholderText="Enter your message here"
                 InputId="Contact Message"
+                required="required"
               />
               <img src={avatar} alt="avatar image" className="hidden md:flex" />
             </div>
             <Button
               title="Send Us Your Message"
               backgroundColor="primaryBlueColor"
-              marginTop="4"
             />
           </form>
         </div>

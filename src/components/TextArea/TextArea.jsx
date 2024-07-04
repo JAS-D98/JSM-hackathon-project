@@ -6,6 +6,7 @@ export default function TextArea({
   InputName,
   InputId,
   placeholderText,
+  required
 }) {
   return (
     <div className="text-[.6em] w-full md:w-[48%] mt-2">
@@ -21,7 +22,7 @@ export default function TextArea({
           id={InputId}
           placeholder={placeholderText}
           className="text-primaryWhiteColor placeholder:text-primaryWhiteColor rounded outline-none w-full bg-transparent px-2 focus:bg-transparent leading-tight text-[1.3em] mt-1"
-          required
+          required={required}
         />
       </div>
     </div>
