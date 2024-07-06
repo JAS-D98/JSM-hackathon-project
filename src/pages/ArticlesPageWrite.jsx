@@ -68,11 +68,11 @@ export default function ArticlesPageWrite() {
             </h1>
             <div className="flex justify-between">
               <TextArea
-                Labelname="articlemessage"
+                Labelname="Article"
                 InputIcon={<MdOutlineMessage />}
-                InputName="Article Message"
+                InputName="article"
                 placeholderText="Type your article here"
-                InputId="articlemessage"
+                InputId="article"
                 required="required"
               />
               <img

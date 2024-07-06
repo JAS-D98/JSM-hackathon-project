@@ -33,7 +33,7 @@ function ContactUsPage() {
     });
 
   return (
-    <div className="px-20">
+    <div className="px-10 md:px-20">
       <div className="w-full h-96 flex items-center justify-center flex-col">
         <h1 className="font-bold text-3xl md:text-6xl text-primaryBlackColor text-center">
           <span className="text-primaryBlueColor">We would</span> like to hear{" "}
