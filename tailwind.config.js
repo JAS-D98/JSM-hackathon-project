@@ -13,6 +13,7 @@ export default {
         blackGradient: "#00000080",
         secondaryBlackColor: "#1E1E1E",
         primaryWhiteColor: "#FFFFFF",
+        primaryErrorMessage:"#ef4444"
       },
     },
   },

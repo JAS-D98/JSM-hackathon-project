@@ -11,8 +11,26 @@ import {
   MdOutlinePhoneInTalk,
   MdOutlineMessage,
 } from "react-icons/md";
+import { useFormik } from "formik";
+import { contactFormValidation } from "../formvalidations/ContactFormValidation.jsx";
+
+const initialValues = {
+  fname: "",
+  lname: "",
+  email: "",
+  phone: "",
+  message: "",
+};
 
 function ContactUsPage() {
+  const { values, handleBlur, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: initialValues,
+    validationSchema: contactFormValidation,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
     <div className="px-20">
       <div className="w-full h-96 flex items-center justify-center flex-col">
@@ -26,67 +44,100 @@ function ContactUsPage() {
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-2/3">
-          <h1 className="font-semibold capitalize text-primaryBlackColor text-2xl">
+          <h1 className="font-semibold capitalize text-primaryBlackColor text-xl md:text-2xl">
             <span className="text-primaryBlueColor">0.1</span> Fill in the form
             Below
           </h1>
-          <form action="" className="mt-2">
+          <form action="" className="mt-2" onSubmit={handleSubmit}>
             <div className="flex flex-col md:flex-row items-center gap-4 flex-wrap justify-between">
-              <FormInput
-                InputType="text"
-                Labelname="First Name"
-                InputIcon={<FaUserEdit />}
-                InputId="First Name"
-                InputName="First Name"
-                placeholderText="Enter your first name here"
-                required="required"
-              />
-              <FormInput
-                InputType="text"
-                Labelname="Last Name"
-                InputIcon={<FaUserEdit />}
-                InputId="Last Name"
-                InputName="Last Name"
-                placeholderText="Enter your last name here"
-                required="required"
-              />
-              <FormInput
-                InputType="email"
-                Labelname="Email Address"
-                InputIcon={<MdOutlineMail />}
-                InputId="Email Address"
-                InputName="Email Address"
-                placeholderText="Enter your email address here"
-                required="required"
-              />
-              <FormInput
-                InputType="number"
-                Labelname="Phone Number"
-                InputIcon={<MdOutlinePhoneInTalk />}
-                InputId="Phone Number"
-                InputName="Phone Number"
-                placeholderText="Enter your phone number here e.g +254706..."
-                required="required"
-              />
+              <div className="w-full md:w-[48%]">
+                <FormInput
+                  InputType="text"
+                  Labelname="First Name"
+                  InputIcon={<FaUserEdit />}
+                  InputId="fname"
+                  InputName="fname"
+                  placeholderText="Enter your first name here"
+                  required="required"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.fname}
+                />
+                {errors.fname && touched.fname && <small className="text-primaryErrorMessage">{errors.fname}</small>}
+              </div>
+              <div className="w-full md:w-[48%]">
+                <FormInput
+                  InputType="text"
+                  Labelname="Last Name"
+                  InputIcon={<FaUserEdit />}
+                  InputId="lname"
+                  InputName="lname"
+                  placeholderText="Enter your last name here"
+                  required="required"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.lname}
+                />
+                {errors.lname && touched.lname && <small className="text-primaryErrorMessage">{errors.lname}</small>}
+              </div>
+              <div className="w-full md:w-[48%]">
+                <FormInput
+                  InputType="email"
+                  Labelname="Email Address"
+                  InputIcon={<MdOutlineMail />}
+                  InputId="email"
+                  InputName="email"
+                  placeholderText="Enter your email address here"
+                  required="required"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.email}
+                />
+                {errors.email && touched.email && <small className="text-primaryErrorMessage">{errors.email}</small>}
+              </div>
+              <div className="w-full md:w-[48%]">
+                <FormInput
+                  InputType="tel"
+                  Labelname="Phone Number"
+                  InputIcon={<MdOutlinePhoneInTalk />}
+                  InputId="phone"
+                  InputName="phone"
+                  placeholderText="Enter your phone number here e.g +254706..."
+                  required="required"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.phone}
+                />
+                {errors.phone && touched.phone && <small className="text-primaryErrorMessage">{errors.phone}</small>}
+              </div>
             </div>
-            <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
+            <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-xl md:text-2xl ">
               <span className="text-primaryBlueColor">0.2</span> Attach Your
               Message Below
             </h1>
             <div className="flex justify-between">
-              <TextArea
-                Labelname="Message"
-                InputIcon={<MdOutlineMessage />}
-                InputName="Contact Message"
-                placeholderText="Enter your message here"
-                InputId="Contact Message"
-                required="required"
-              />
+              <div className="w-full">
+                <TextArea
+                  Labelname="Message"
+                  InputIcon={<MdOutlineMessage />}
+                  InputName="message"
+                  placeholderText="Enter your message here"
+                  InputId="message"
+                  required="required"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.message}
+                  error={errors.message}
+                  touched={touched.message}
+                />
+                {errors.message && touched.message && <small className="text-primaryErrorMessage">{errors.message}</small>}
+              </div>
               <img src={avatar} alt="avatar image" className="hidden md:flex" />
             </div>
             <Button
               title="Send Us Your Message"
               backgroundColor="primaryBlueColor"
+              type="submit"
             />
           </form>
         </div>
