@@ -38,7 +38,7 @@ function Navbar() {
           <Link to="/login">
             <Button title="Login" marginTop="0" />
           </Link>
-          <Link to="/logout">
+          <Link to="/sign-up">
             {" "}
             <Button
               title="Sign Up"

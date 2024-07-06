@@ -11,7 +11,8 @@ import AddSchoolsPage from "./pages/AddSchoolsPage";
 import ArticlesPageWrite from "./pages/ArticlesPageWrite";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/authentication/Login";
-import Logout from "./pages/authentication/Logout";
+import SignUp from "./pages/authentication/SignUp";
+
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/schools-register" element={<AddSchoolsPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
