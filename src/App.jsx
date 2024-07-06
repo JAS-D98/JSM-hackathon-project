@@ -26,8 +26,8 @@ export default function App() {
           <Route path="/articles-write" element={<ArticlesPageWrite />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/schools-register" element={<AddSchoolsPage />} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/logout" element={<Logout/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

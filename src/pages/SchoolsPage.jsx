@@ -2,29 +2,29 @@ import React, { useEffect, useState } from "react";
 import Button from "../components/button/Button";
 import InputSection from "../components/InputSection/InputSection";
 import { aboutimage1 } from "../assets/images";
-import axios from "axios"
+import axios from "axios";
 
 export default function SchoolsPage() {
-  const [schools, setSchools]=useState([])
-  const [message, setMessage]=useState("")
-  const handleFetch=async()=>{
+  const [schools, setSchools] = useState([]);
+  const [message, setMessage] = useState("");
+  const handleFetch = async () => {
     try {
-      const schoolUrl="http://localhost:5000/api/schools-mine/schools"
-      const schools=await axios.get(schoolUrl)
+      const schoolUrl = "http://localhost:5000/api/schools-mine/schools";
+      const schools = await axios.get(schoolUrl);
       console.log(schools);
-      if(!schools.ok){
-        setMessage("No schools at the moment found")
+      if (!schools.ok) {
+        setMessage("No schools at the moment found");
       }
-      setSchools(schools.data.data)
+      setSchools(schools.data.data);
       console.log(schools.data.data);
     } catch (error) {
       console.error(error.Message);
-      setMessage("A problem occurred with the server try again later")
+      setMessage("A problem occurred with the server try again later");
     }
-  }
-  useEffect(()=>{
-    handleFetch()
-  },[])
+  };
+  useEffect(() => {
+    handleFetch();
+  }, []);
   return (
     <div className="px-10 md:px-20">
       <div className="w-full h-[60vh] md:h-[80vh] flex items-center justify-center flex-col">

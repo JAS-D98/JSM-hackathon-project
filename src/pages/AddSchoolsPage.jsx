@@ -16,10 +16,15 @@ const initialValues = {
   aboutSchool: "",
   schoolVision: "",
   image: null,
-  schoolCategory: ""
+  schoolCategory: "",
 };
 
-const categories = ["University","High School", "Primary School", "Kindergarten"];
+const categories = [
+  "University",
+  "High School",
+  "Primary School",
+  "Kindergarten",
+];
 
 function AddSchoolsPage() {
   const [imageUrl, setImageUrl] = useState("");
@@ -37,7 +42,10 @@ function AddSchoolsPage() {
           const url = await fileRef.getDownloadURL();
           setImageUrl(url);
 
-          console.log("Form values with image URL:", { ...values, imageUrl: url });
+          console.log("Form values with image URL:", {
+            ...values,
+            imageUrl: url,
+          });
         } catch (error) {
           console.error("Error uploading image:", error);
         }

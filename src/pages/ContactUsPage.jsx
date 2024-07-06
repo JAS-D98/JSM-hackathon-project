@@ -23,13 +23,14 @@ const initialValues = {
 };
 
 function ContactUsPage() {
-  const { values, handleBlur, handleChange, handleSubmit, errors, touched } = useFormik({
-    initialValues: initialValues,
-    validationSchema: contactFormValidation,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: contactFormValidation,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    });
 
   return (
     <div className="px-20">
@@ -63,7 +64,11 @@ function ContactUsPage() {
                   onChange={handleChange}
                   value={values.fname}
                 />
-                {errors.fname && touched.fname && <small className="text-primaryErrorMessage">{errors.fname}</small>}
+                {errors.fname && touched.fname && (
+                  <small className="text-primaryErrorMessage">
+                    {errors.fname}
+                  </small>
+                )}
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
@@ -78,7 +83,11 @@ function ContactUsPage() {
                   onChange={handleChange}
                   value={values.lname}
                 />
-                {errors.lname && touched.lname && <small className="text-primaryErrorMessage">{errors.lname}</small>}
+                {errors.lname && touched.lname && (
+                  <small className="text-primaryErrorMessage">
+                    {errors.lname}
+                  </small>
+                )}
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
@@ -93,7 +102,11 @@ function ContactUsPage() {
                   onChange={handleChange}
                   value={values.email}
                 />
-                {errors.email && touched.email && <small className="text-primaryErrorMessage">{errors.email}</small>}
+                {errors.email && touched.email && (
+                  <small className="text-primaryErrorMessage">
+                    {errors.email}
+                  </small>
+                )}
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
@@ -108,7 +121,11 @@ function ContactUsPage() {
                   onChange={handleChange}
                   value={values.phone}
                 />
-                {errors.phone && touched.phone && <small className="text-primaryErrorMessage">{errors.phone}</small>}
+                {errors.phone && touched.phone && (
+                  <small className="text-primaryErrorMessage">
+                    {errors.phone}
+                  </small>
+                )}
               </div>
             </div>
             <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-xl md:text-2xl ">
@@ -130,7 +147,11 @@ function ContactUsPage() {
                   error={errors.message}
                   touched={touched.message}
                 />
-                {errors.message && touched.message && <small className="text-primaryErrorMessage">{errors.message}</small>}
+                {errors.message && touched.message && (
+                  <small className="text-primaryErrorMessage">
+                    {errors.message}
+                  </small>
+                )}
               </div>
               <img src={avatar} alt="avatar image" className="hidden md:flex" />
             </div>
