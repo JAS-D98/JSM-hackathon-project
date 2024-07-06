@@ -1,4 +1,11 @@
 import React from "react";
+// import { useFormik } from "formik"
+
+// const initialValue={
+//     name:'',
+//     email:'',
+//     articlemessage:''
+// }
 
 export default function FormInput({
   Labelname,
@@ -7,8 +14,15 @@ export default function FormInput({
   InputName,
   InputId,
   placeholderText,
-  required
+  required,
+  onchange
 }) {
+  // const {values, handleBlur, handleChange, handleSubmit}=useFormik({
+  //   initialValues:initialValues,
+  //   onSubmit:(values)=>{
+
+  //   }
+  // })
   return (
     <div className="text-[.6em] w-full md:w-[48%] text-2xl ">
       <label htmlFor={InputId}>
@@ -26,6 +40,7 @@ export default function FormInput({
           name={InputName}
           min="0"
           required={required}
+          onChange={onchange}
         />
       </div>
     </div>

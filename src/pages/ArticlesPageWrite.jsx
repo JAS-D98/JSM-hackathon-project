@@ -39,8 +39,8 @@ export default function ArticlesPageWrite() {
                 InputType="text"
                 Labelname="Name"
                 InputIcon={<FaUserEdit />}
-                InputId="Name"
-                InputName="Name"
+                InputId="name"
+                InputName="name"
                 placeholderText="Enter your name here"
                 required="required"
               />
@@ -56,8 +56,8 @@ export default function ArticlesPageWrite() {
                 InputType="email"
                 Labelname="Email Address"
                 InputIcon={<MdOutlineMail />}
-                InputId="Email Address"
-                InputName="Email Address"
+                InputId="email"
+                InputName="email"
                 placeholderText="Enter your email address here"
                 required="required"
               />
@@ -68,11 +68,11 @@ export default function ArticlesPageWrite() {
             </h1>
             <div className="flex justify-between">
               <TextArea
-                Labelname="Article"
+                Labelname="articlemessage"
                 InputIcon={<MdOutlineMessage />}
                 InputName="Article Message"
                 placeholderText="Type your article here"
-                InputId="Article Message"
+                InputId="articlemessage"
                 required="required"
               />
               <img

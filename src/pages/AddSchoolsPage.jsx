@@ -85,6 +85,12 @@ function AddSchoolsPage() {
                 InputName="Facebook Link(Optional)"
                 placeholderText="Enter schools facebook link here"
               />
+              <FormInput
+                InputType="file"
+                Labelname="Upload Image"
+                InputId="upload"
+                
+              />
             </div>
             <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
               <span className="text-primaryBlueColor">0.2</span> About the
