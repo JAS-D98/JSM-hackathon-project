@@ -16,7 +16,7 @@ export default function ArticlesPage() {
         setMessage("No articles at the moment found")
       }
       setArticles(articles.data.data)
-      console.log(articles.data.data);
+      console.log(articles);
     } catch (error) {
       console.error(error.Message);
     }
@@ -45,10 +45,13 @@ export default function ArticlesPage() {
         </div>
       </div>
       <div>
-        <h1 className="text-primaryBlackColor font-bold text-center md:text-start text-2xl md:text-4xl">
+        {articles.length > 0 ? (
+          <h1 className="text-primaryBlackColor font-bold text-center md:text-start text-2xl md:text-4xl">
           Articles Written
         </h1>
-        {articles.length>0 ? (
+        ):(
+          <p className="text-primaryBlackColor font-bold text-center md:text-start text-2xl md:text-4xl">No Articles Found</p>
+        )}
           <div>
             {articles.map((article) => (
               <div className="border shadow-xl rounded-xl mt-4 p-4" key={article.article_id}>
@@ -66,9 +69,6 @@ export default function ArticlesPage() {
               </div>
             ))}
           </div>
-        ):(
-          <p>{message}</p>
-        ) }
       </div>
     </div>
   );
