@@ -5,7 +5,7 @@ export const loginAuthenticationValidation = Yup.object({
     .email("Please Enter valid Email")
     .required("Please Enter Your Email"),
     password: Yup.string()
-    .matches(/^\+?\d{8,}$/, "Password should not be less than 8 characters")
+    .min(8).required("Password should not be less than 8 characters")
     .required("Please enter password"),
 });
 
@@ -16,6 +16,6 @@ export const signUpAuthenticationValidation = Yup.object({
     .email("Please Enter valid Email")
     .required("Please Enter Your Email"),
     password: Yup.string()
-    .matches(/^\+?\d{8,}$/, "Password should not be less than 8 characters")
+    .min(8).required("Password should not be less than 8 characters")
     .required("Please enter password"),
 });

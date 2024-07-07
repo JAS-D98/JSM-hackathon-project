@@ -4,8 +4,9 @@ import { MdOutlineEmail, MdOutlinePassword, MdOutlinePerson } from 'react-icons/
 import { signUpAuthenticationValidation } from '../../formvalidations/authenticationValidation';
 import { useFormik } from 'formik';
 import Button from '../../components/button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BarLoader } from 'react-spinners';
 
 const initialValues = {
   name: "",
@@ -16,6 +17,8 @@ const initialValues = {
 export default function SignUp() {
   const [userCreatedMessage, setUserCreatedMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
@@ -23,9 +26,12 @@ export default function SignUp() {
       validationSchema: signUpAuthenticationValidation,
       onSubmit: async (values) => {
         try {
+          setLoading(true);
           const response = await axios.post('http://localhost:5000/authentication/sign-up', values);
           setUserCreatedMessage(response.data.message);
           setError("");
+          setLoading(false);
+          navigate('/login');
         } catch (error) {
           if (error.response) {
             setError(error.response.data.message); 
@@ -33,6 +39,7 @@ export default function SignUp() {
             setError("An issue occurred while creating your account. Please try again."); 
           }
           setUserCreatedMessage("");
+          setLoading(false);
         }
       },
     });
@@ -42,8 +49,19 @@ export default function SignUp() {
       <div className='flex items-center justify-center w-full md:w-[70%] min-h-[70vh] mx-auto shadow-2xl rounded overflow-hidden'>
         <div className='w-full h-full flex flex-col items-center justify-between px-2'>
           <h1 className='text-primaryBlackColor font-bold text-xl md:text-2xl capitalize'>Create Account</h1>
-          {userCreatedMessage && <p className="text-successColorCode">{userCreatedMessage}</p>}
-          {error && <p className="text-primaryErrorMessage">{error}</p>}
+          {userCreatedMessage && <p className="text-successColorCode text-sm md:text-xl text-center">{userCreatedMessage}</p>}
+          {error && <p className="text-primaryErrorMessage text-sm md:text-xl text-center">{error}</p>}
+          {loading && (
+            <div className='loading-container'>
+              <p className='text-primaryBlackColor'>Creating Account, Please Wait...</p>
+              <BarLoader
+                height={4}
+                width={100}
+                color="#87CEEB"
+                loading={true}
+              />
+            </div>
+          )}
           <form onSubmit={handleSubmit} className='w-full'>
             <div className="w-full">
               <FormInput
