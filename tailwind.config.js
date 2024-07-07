@@ -14,6 +14,7 @@ export default {
         secondaryBlackColor: "#1E1E1E",
         primaryWhiteColor: "#FFFFFF",
         primaryErrorMessage: "#ef4444",
+        successColorCode:"#008000"
       },
     },
   },
