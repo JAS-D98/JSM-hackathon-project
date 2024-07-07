@@ -12,7 +12,6 @@ import ArticlesPageWrite from "./pages/ArticlesPageWrite";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/authentication/Login";
 import SignUp from "./pages/authentication/SignUp";
-import ProtectedRoutes from "./components/protectedroutes/ProtectedRoutes";
 
 export default function App() {
   return (
@@ -29,8 +28,6 @@ export default function App() {
           <Route path="/schools-register" element={<AddSchoolsPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <ProtectedRoutes path="/articles-write" element={<ArticlesPageWrite />} />
-          <ProtectedRoutes path="/schools-register" element={<AddSchoolsPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />

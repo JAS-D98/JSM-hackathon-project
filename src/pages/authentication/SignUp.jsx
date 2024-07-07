@@ -32,6 +32,9 @@ export default function SignUp() {
           setError("");
           setLoading(false);
           navigate('/login');
+          setTimeout(() => {
+            setUserCreatedMessage("");
+          }, 5000);
         } catch (error) {
           if (error.response) {
             setError(error.response.data.message); 
@@ -40,6 +43,9 @@ export default function SignUp() {
           }
           setUserCreatedMessage("");
           setLoading(false);
+          setTimeout(() => {
+            setError("");
+          }, 5000);
         }
       },
     });

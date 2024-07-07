@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios'; // Import Axios
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaUserEdit } from "react-icons/fa";
 import FormInput from "../components/formInput/FormInput";
@@ -13,6 +14,7 @@ import {
 } from "react-icons/md";
 import { useFormik } from "formik";
 import { contactFormValidation } from "../formvalidations/ContactFormValidation.jsx";
+import { BarLoader } from 'react-spinners';
 
 const initialValues = {
   fname: "",
@@ -23,12 +25,35 @@ const initialValues = {
 };
 
 function ContactUsPage() {
+  const [sentMessage, setSentMessage] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
       initialValues: initialValues,
       validationSchema: contactFormValidation,
-      onSubmit: (values) => {
-        console.log(values);
+      onSubmit: async (values) => {
+        try {
+          setLoading(true);
+          const response = await axios.post('http://localhost:5000/api/schools-mine/contacts', values);
+          setSentMessage(response.data.data);
+          setError("");
+          setLoading(false);
+          setTimeout(() => {
+            setSentMessage("");
+          }, 5000);
+        } catch (error) {
+          if (error.response) {
+            setError(error.response.data.data);
+          } else {
+            setError("There was a problem when submitting your form");
+          }
+          setSentMessage("");
+          setLoading(false);
+          setTimeout(() => {
+            setError("");
+          }, 5000); 
+        }
       },
     });
 
@@ -159,7 +184,20 @@ function ContactUsPage() {
               title="Send Us Your Message"
               backgroundColor="primaryBlueColor"
               type="submit"
-            />
+              />
+              {sentMessage && <p className="text-successColorCode text-sm md:text-xl">{sentMessage}</p>}
+              {error && <p className="text-primaryErrorMessage text-sm md:text-xl">{error}</p>}
+              {loading && (
+              <div className='loading-container'>
+                <p className='text-primaryBlackColor'>Submitting, Please Wait...</p>
+                <BarLoader
+                  height={4}
+                  width={100}
+                  color="#87CEEB"
+                  loading={true}
+                />
+              </div>
+            )}
           </form>
         </div>
 
