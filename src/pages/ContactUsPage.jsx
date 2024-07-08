@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaUserEdit } from "react-icons/fa";
 import FormInput from "../components/formInput/FormInput";

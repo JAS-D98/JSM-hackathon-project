@@ -26,7 +26,7 @@ const categories = [
   "Kindergarten",
 ];
 
-function AddSchoolsPage() {
+export const AddSchoolsPage=()=> {
   const [imageUrl, setImageUrl] = useState("");
 
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =

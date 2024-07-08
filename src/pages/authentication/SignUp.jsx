@@ -27,7 +27,7 @@ export default function SignUp() {
       onSubmit: async (values) => {
         try {
           setLoading(true);
-          const response = await axios.post('http://localhost:5000/authentication/sign-up', values);
+          const response = await axios.post('http://localhost:5000/authentication/sign-up/', values);
           setUserCreatedMessage(response.data.message);
           setError("");
           setLoading(false);
