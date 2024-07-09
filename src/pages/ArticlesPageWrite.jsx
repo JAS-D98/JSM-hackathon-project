@@ -1,6 +1,121 @@
+// import React, { useState } from 'react'
+// import { readingavatar } from "../assets/images";
+// import { useFormik } from 'formik';
+// import Button from '../components/button/Button';
+// import FormInput from '../components/formInput/FormInput';
+// import { FaHeading, FaUser} from 'react-icons/fa';
+// import { articleFormValidation } from "../formvalidations/ArticleFormValidation"
+// import TextArea from '../components/TextArea/TextArea';
+// import { MdOutlineArticle } from 'react-icons/md';
+
+// export default function ArticlesPageWrite() {
+//   const [loading, setLoading] = useState(false);
+//   const [sendingArticle, setSendingArticle] = useState("");
+//   const [error, setError] = useState("");
+//   const formik=useFormik({
+//     initialValues:{
+//       title:"",
+//       article:"",
+//     },
+//     // validationSchema: articleFormValidation,
+//     onSubmit:(values)=>{
+//       console.log(values);
+//     }
+//   })
+//   return (
+//     <div>
+//       <div className="px-10 md:px-20">
+//         <div className="w-full h-[80vh] flex items-center justify-center flex-col">
+//           <div className="bg-primaryBlueColor w-full rounded-xl text-center p-4 flex flex-col items-center">
+//             <h1 className="font-bold text-2xl md:text-6xl text-primaryWhiteColor capitalize text-center">
+//               Inspire students, teachers and parents with your article
+//             </h1>
+//           </div>
+//           <img
+//             src={readingavatar}
+//             alt="avatar image"
+//             className="md:hidden flex w-1/2"
+//           />
+//         </div>
+//         <h1 className="text-2xl md:text-4xl text-primaryBlueColor font-bold text-center mb-6 uppercase">
+//           We would <span className="text-primaryBlackColor">l🖤ve to read</span>{" "}
+//           your article
+//         </h1>
+//         <form action="" className="mt-2" onSubmit={formik.handleSubmit}>
+//         <div className="flex flex-col md:flex-row items-center gap-4 flex-wrap justify-between">
+//         <div className="w-full">
+//           <FormInput InputType="text" Labelname="Author Name" InputIcon={<FaUser />} InputId="name" InputName="name" placeholderText="Enter authors name here" required="required" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} touched={formik.touched.name}/>
+//           {/* {formik.errors.name && formik.touched.name && (<small className="text-primaryErrorMessage">{formik.errors.name}</small>)} */}
+//         </div>
+//         <div className="w-full">
+//           <FormInput InputType="text" Labelname="Article Title" InputIcon={<FaHeading />} InputId="title" InputName="title" placeholderText="Enter your title here" required="required" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.title} touched={formik.touched.title}/>
+//           {/* {formik.errors.title && formik.touched.title && (<small className="text-primaryErrorMessage">{formik.errors.title}</small>)} */}
+//         </div>
+//         </div>
+//         <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
+//           <span className="text-primaryBlueColor">0.2</span> Attach Your
+//           Article Below
+//         </h1>
+//         <div className="flex justify-between">
+//           <div className="w-full">
+//             <TextArea
+//               Labelname="Article"
+//               InputIcon={<MdOutlineArticle />}
+//               InputName="article"
+//               placeholderText="Enter your article here"
+//               InputId="article"
+//               required="required"
+//               onBlur={formik.handleBlur}
+//               onChange={formik.handleChange}
+//               value={formik.values.article}
+//               touched={formik.touched.article}
+//             />
+//             {/* {errors.article && touched.article && (
+//               <small className="text-primaryErrorMessage">
+//                 {errors.article}
+//               </small>
+//             )} */}
+//           </div>
+//           <img
+//             src={readingavatar}
+//             alt="avatar image"
+//             className="hidden md:flex w-1/2 -mt-10"
+//           />
+//         </div>
+//         <Button title="Send Article" backgroundColor="primaryBlueColor" type="submit"/>
+//         {sendingArticle && (
+//               <p className="text-successColorCode text-sm md:text-xl">
+//                 {sendingArticle}
+//               </p>
+//             )}
+//             {error && (
+//               <p className="text-primaryErrorMessage text-sm md:text-xl">
+//                 {error}
+//               </p>
+//             )}
+//             {loading && (
+//               <div className="loading-container flex items-center justify-center flex-col gap-1">
+//                 <p className="text-primaryBlackColor">
+//                   Sending Article, Please Wait...
+//                 </p>
+//                 <BarLoader
+//                   height={4}
+//                   width={100}
+//                   color="#87CEEB"
+//                   loading={true}
+//                 />
+//               </div>
+//             )}
+//         </form>
+//       </div>
+//     </div>
+//   )
+// }
+
+
 import React, { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
-import { MdOutlineTitle, MdOutlineMessage } from "react-icons/md";
+import { MdOutlineTitle, MdOutlineArticle } from "react-icons/md";
 import Button from "../components/button/Button";
 import { readingavatar } from "../assets/images";
 import TextArea from "../components/TextArea/TextArea";
@@ -8,42 +123,39 @@ import FormInput from "../components/formInput/FormInput";
 import { useFormik } from 'formik';
 import { BarLoader } from 'react-spinners';
 import axios from 'axios';
-import { articleFormValidation } from "../formvalidations/articleFormValidation";
+import { articleFormValidation } from "../formvalidations/ArticleFormValidation";
 
-const initialValues = {
-  name: "",
-  title: "",
-  article: ""
-};
 
 export default function ArticlesPageWrite() {
+  const [loading, setLoading] = useState(false);
   const [sendingArticle, setSendingArticle] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
-  useFormik({
-    initialValues: initialValues,
-    validationSchema: articleFormValidation,
-    onSubmit: async (values) => {
+  const formik= useFormik({
+    initialValues: {
+       name:"",
+       title: "",
+       article: ""
+    },
+    // validationSchema: articleFormValidation,
+    onSubmit: async(values) => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const response = await axios.post('http://localhost:5000/api/schools-mine/articles',values);
+        const response = await axios.post('http://localhost:5000/api/schools-mine/articles/', values);
+        console.log("API Response:", response.data); 
         setSendingArticle(response.data.data);
         setError("");
-        setLoading(false);
-        setTimeout(() => {
-        setSendingArticle("");
-        }, 5000);
       } catch (error) {
+        console.error("Error: ", error);
         if (error.response) {
           setError(error.response.data.data);
         } else {
           setError("An issue occurred while submitting your article.");
         }
-        setSendingArticle("");
+      } finally {
         setLoading(false);
         setTimeout(() => {
+          setSendingArticle("");
           setError("");
         }, 5000);
       }
@@ -72,31 +184,31 @@ export default function ArticlesPageWrite() {
       </div>
       <div className="flex flex-col md:flex-row px-10 md:px-20">
         <div className="w-full md:w-2/3 mx-auto">
-          <h1 className="font-semibold capitalize text-primaryBlackColor text-2xl">
+          <h1 className="font-semibold capitalize text-primaryBlackColor text-xl md:text-2xl">
             <span className="text-primaryBlueColor">0.1</span> Fill in the form
             Below
           </h1>
-          <form action="" className="mt-2" onSubmit={handleSubmit}>
+          <form action="" className="mt-2" onSubmit={formik.handleSubmit}>
             <div className="flex flex-col md:flex-row items-center gap-4 flex-wrap justify-between">
               <div className="w-full">
                 <FormInput
-                  InputType="name"
+                  InputType="text"
                   Labelname="Your Name"
                   InputIcon={<FaUserEdit />}
                   InputId="name"
                   InputName="name"
                   placeholderText="Enter your name here"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.name}
-                  touched={touched.name}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                  touched={formik.touched.name}
                 />
-                {errors.name && touched.name && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.name}
-                  </small>
-                )}
+                 {/* {errors.name && touched.name && (
+//                   <small className="text-primaryErrorMessage">
+//                     {errors.name}
+//                   </small>
+//                 )} */}
               </div>
               <div className="w-full">
                 <FormInput
@@ -107,19 +219,19 @@ export default function ArticlesPageWrite() {
                   InputName="title"
                   placeholderText="Enter your title here"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.title}
-                  touched={touched.title}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.title}
+                  touched={formik.touched.title}
                 />
-                {errors.title && touched.title && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.title}
-                  </small>
-                )}
+                {/* {formik.errors.title && formik.touched.title && (
+//                   <small className="text-primaryErrorMessage">
+//                     {formik.errors.title}
+//                   </small>
+//                 )} */}
               </div>
             </div>
-            <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl ">
+            <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-xl md:text-2xl ">
               <span className="text-primaryBlueColor">0.2</span> Attach Your
               Article Below
             </h1>
@@ -127,22 +239,21 @@ export default function ArticlesPageWrite() {
               <div className="w-full">
                 <TextArea
                   Labelname="Article"
-                  InputIcon={<MdOutlineMessage />}
+                  InputIcon={<MdOutlineArticle />}
                   InputName="article"
                   placeholderText="Enter your article here"
                   InputId="article"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.article}
-                  error={errors.article}
-                  touched={touched.article}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.article}
+                  touched={formik.touched.article}
                 />
-                {errors.article && touched.article && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.article}
-                  </small>
-                )}
+                {/* {errors.article && touched.article && (
+//                   <small className="text-primaryErrorMessage">
+//                     {errors.article}
+//                   </small>
+//                 )} */}
               </div>
               <img
                 src={readingavatar}
@@ -150,7 +261,7 @@ export default function ArticlesPageWrite() {
                 className="hidden md:flex w-1/2 -mt-10"
               />
             </div>
-            <Button title="Submit Article" backgroundColor="primaryBlueColor" />
+            <Button title="Submit Article" backgroundColor="primaryBlueColor" type="submit"/>
             {sendingArticle && (
               <p className="text-successColorCode text-sm md:text-xl">
                 {sendingArticle}
