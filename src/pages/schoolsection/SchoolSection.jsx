@@ -69,17 +69,9 @@ const SchoolSection = () => {
         </div>
         <hr className="bg-primaryBlueColor h-1 rounded-xl mt-2" />
         <div className="flex justify-center gap-2 mt-[2%]">
-          <a href={school.linkedin_profile} target="_blank" rel="noopener noreferrer">
-            <div className="flex flex-col flex-wrap items-center gap-2 bg-tertiaryBlueColor p-2 rounded">
-              <h2 className="text-primaryBlueColor capitalize md:text-xl font-semibold">
-                LinkedIn Profile
-              </h2>
-              <p className="text-2xl text-primaryBlueColor">
-                <FaLinkedin />
-              </p>
-            </div>
-          </a>
-          <a href={school.facebook_profile} target="_blank" rel="noopener noreferrer">
+       
+         {school.school_facebook &&  
+         <a href={school.school_facebook} target="_blank" rel="noopener noreferrer">
             <div className="flex flex-col flex-wrap items-center gap-2 bg-tertiaryBlueColor p-2 rounded">
               <h2 className="text-primaryBlueColor capitalize md:text-xl font-semibold">
                 Facebook Profile
@@ -88,7 +80,7 @@ const SchoolSection = () => {
                 <FaFacebook />
               </p>
             </div>
-          </a>
+          </a>}
         </div>
       </div>
     </div>
