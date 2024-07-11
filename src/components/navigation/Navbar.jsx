@@ -1,17 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { navLinks } from "../../data/Navigation";
 import { IoMoonOutline, IoSearch, IoSunny } from "react-icons/io5";
 import Button from "../button/Button";
 import { logo } from "../../assets/images";
 
 function Navbar() {
-  const [dark, setDark] = React.useState(false);
+  const navigate = useNavigate();
+  const [dark, setDark] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const darkModeHandler = () => {
     setDark(!dark);
     document.body.classList.toggle("dark");
   };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5000/authentication/logout");
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+  
+
   return (
     <div className="w-full fixed z-20">
       <div className="text-primaryWhiteColor font-poppins w-full md:w-[90%] md:mt-4 mx-auto bg-primaryBlueColor p-3 md:rounded-xl flex items-center justify-between">
@@ -35,18 +56,30 @@ function Navbar() {
           <IoSearch />
         </div>
         <div className="flex items-center gap-2">
-          <Link to="/login">
-            <Button title="Login" marginTop="0" />
-          </Link>
-          <Link to="/sign-up">
-            {" "}
+          {!isLoggedIn && (
+            <>
+              <Link to="/login">
+                <Button title="Login" marginTop="0" />
+              </Link>
+              <Link to="/sign-up">
+                <Button
+                  title="Sign Up"
+                  backgroundColor="bg-primary"
+                  border="border"
+                  marginTop="0"
+                />
+              </Link>
+            </>
+          )}
+          {isLoggedIn && (
             <Button
-              title="Sign Up"
+              title="Log Out"
               backgroundColor="bg-primary"
               border="border"
               marginTop="0"
+              onClick={handleLogout}
             />
-          </Link>
+          )}
         </div>
       </div>
     </div>
