@@ -11,6 +11,7 @@ export default function FormInput({
   onChange,
   onBlur,
   value,
+  accept,
 }) {
   return (
     <div className="text-[.6em] w-full text-2xl ">
@@ -33,6 +34,7 @@ export default function FormInput({
           onBlur={onBlur}
           value={value}
           autoComplete="false"
+          accept={accept}
         />
       </div>
     </div>

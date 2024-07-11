@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useDropzone } from "react-dropzone";
+import axios from "axios";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import FormInput from "../components/formInput/FormInput";
 import Button from "../components/button/Button";
 import { addSchoolValidation } from "../formvalidations/addSchoolFormValidation";
 import TextArea from "../components/TextArea/TextArea";
+import { storage } from "../configuration/FireBase.configuration";
+import { FaMessage, FaSchool } from "react-icons/fa6";
+import { BarLoader } from "react-spinners";
 
 const initialValues = {
   schoolName: "",
   schoolLocation: "",
-  emailAddress: "",
-  phoneNumber: "",
-  linkedIn: "",
-  facebook: "",
-  aboutSchool: "",
+  schoolEmail: "",
+  schoolPhone: "",
+  schoolLinkedIn: "",
+  schoolFacebook: "",
+  schoolAbout: "",
   schoolVision: "",
-  image: null,
+  schoolImage: null,
   schoolCategory: "",
 };
 
@@ -26,41 +30,57 @@ const categories = [
   "Kindergarten",
 ];
 
-export const AddSchoolsPage=()=> {
-  const [imageUrl, setImageUrl] = useState("");
-
-  const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
-    useFormik({
-      initialValues,
-      validationSchema: addSchoolValidation,
-      onSubmit: async (values) => {
+const AddSchoolsPage = () => {
+  const [imagePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [uploadingSchool, setUploadingSchool] = useState("");
+  const [error, setError] = useState("");
+  const formik = useFormik({
+    initialValues,
+    validationSchema: addSchoolValidation,
+    onSubmit: async (values) => {
+      if (values.schoolImage) {
+        const imageRef = ref(storage, `images/${values.schoolImage.name}`);
+        await uploadBytes(imageRef, values.schoolImage);
+        const schoolUrl = await getDownloadURL(imageRef);
+        const formData = {
+          ...values,
+          schoolImage: schoolUrl,
+        };
         try {
-          const storageRef = firebase.storage().ref();
-          const fileRef = storageRef.child(`images/${values.image.name}`);
-          await fileRef.put(values.image);
-
-          const url = await fileRef.getDownloadURL();
-          setImageUrl(url);
-
-          console.log("Form values with image URL:", {
-            ...values,
-            imageUrl: url,
-          });
+          setLoading(true)
+          const response = await axios.post(
+            "http://localhost:5000/api/schools-mine/schools/",
+            formData
+          );
+          console.log("API Response:", response.data);
+          setUploadingSchool(response.data.data);
+          setLoading(false)
+          setError("");
+          console.log(response.data);
         } catch (error) {
-          console.error("Error uploading image:", error);
+          console.error("Error: ", error);
+          if (error.response) {
+            setError(error.response.data.message);
+          } else {
+            setError("An issue occurred while submitting your article.");
+          }
+        } finally {
+          setLoading(false);
+          setTimeout(() => {
+            setUploadingSchool("");
+            setError("");
+          }, 5000);
         }
-      },
-    });
-
-  const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    values.image = file;
-  };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: "image/*",
+      }
+    },
   });
+
+  const handleImageChange = (event) => {
+    const file = event.currentTarget.files[0];
+    formik.setFieldValue("schoolImage", file);
+    setImagePreview(URL.createObjectURL(file));
+  };
 
   return (
     <div className="px-10 md:px-20">
@@ -73,36 +93,12 @@ export const AddSchoolsPage=()=> {
           At the comfort of your home, book a space with us
         </p>
       </div>
-      <div className="flex flex-col md:flex-row items-center gap-2">
-        <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center gap-2 bg-tertiaryBlueColor p-2 md:bg-primaryWhiteColor">
-          <p className="text-xl md:text-2xl font-semibold text-secondaryBlackColor">
-            Upload Image of School Here
-          </p>
-          <div
-            {...getRootProps()}
-            className={`border-2 md:h-48 text-primaryBlackColor md:bg-primaryBlueColor md:text-primaryWhiteColor border-dashed rounded p-4 text-center ${
-              isDragActive
-                ? "border-primaryBlueColor text-primaryBlackColor"
-                : "border-primaryWhiteColor text-primaryBlackColor"
-            }`}
-          >
-            <input {...getInputProps()} />
-            {isDragActive ? (
-              <p className="text-primaryWhiteColor">Drop your image here ...</p>
-            ) : (
-              <p>
-                Drag 'and' drop school image here, <br /> or{" "}
-                <span className="text-primaryBlackColor">click here</span> to
-                select image
-              </p>
-            )}
-          </div>
-        </div>
+      <div className="flex flex-col md:flex-row items-center gap-2 justify-center">
         <div className="w-full md:w-2/3">
           <h1 className="font-semibold capitalize text-primaryBlackColor text-2xl">
             <span className="text-primaryBlueColor">0.1</span> school details
           </h1>
-          <form className="mt-2" onSubmit={handleSubmit}>
+          <form className="mt-2" onSubmit={formik.handleSubmit}>
             <div className="flex flex-col md:flex-row items-center gap-4 flex-wrap justify-between">
               <div className="w-full md:w-[48%]">
                 <FormInput
@@ -112,13 +108,13 @@ export const AddSchoolsPage=()=> {
                   InputName="schoolName"
                   placeholderText="Enter the name of your school here"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.schoolName}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolName}
                 />
-                {errors.schoolName && touched.schoolName && (
+                {formik.errors.schoolName && formik.touched.schoolName && (
                   <small className="text-primaryErrorMessage">
-                    {errors.schoolName}
+                    {formik.errors.schoolName}
                   </small>
                 )}
               </div>
@@ -130,49 +126,50 @@ export const AddSchoolsPage=()=> {
                   InputName="schoolLocation"
                   placeholderText="Enter the location of your school here"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.schoolLocation}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolLocation}
                 />
-                {errors.schoolLocation && touched.schoolLocation && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.schoolLocation}
-                  </small>
-                )}
+                {formik.errors.schoolLocation &&
+                  formik.touched.schoolLocation && (
+                    <small className="text-primaryErrorMessage">
+                      {formik.errors.schoolLocation}
+                    </small>
+                  )}
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
                   InputType="email"
                   Labelname="Email Address"
-                  InputId="emailAddress"
-                  InputName="emailAddress"
+                  InputId="schoolEmail"
+                  InputName="schoolEmail"
                   placeholderText="Enter email address for the school here"
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.emailAddress}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolEmail}
                 />
-                {errors.emailAddress && touched.emailAddress && (
+                {formik.errors.schoolEmail && formik.touched.schoolEmail && (
                   <small className="text-primaryErrorMessage">
-                    {errors.emailAddress}
+                    {formik.errors.schoolEmail}
                   </small>
                 )}
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
-                  InputType="number"
+                  InputType="text"
                   Labelname="Phone Number"
-                  InputId="phoneNumber"
-                  InputName="phoneNumber"
+                  InputId="schoolPhone"
+                  InputName="schoolPhone"
                   placeholderText="Enter school's phone number here e.g +254706..."
                   required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.phoneNumber}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolPhone}
                 />
-                {errors.phoneNumber && touched.phoneNumber && (
+                {formik.errors.schoolPhone && formik.touched.schoolPhone && (
                   <small className="text-primaryErrorMessage">
-                    {errors.phoneNumber}
+                    {formik.errors.schoolPhone}
                   </small>
                 )}
               </div>
@@ -180,24 +177,24 @@ export const AddSchoolsPage=()=> {
                 <FormInput
                   InputType="text"
                   Labelname="LinkedIn"
-                  InputId="linkedIn"
-                  InputName="linkedIn"
+                  InputId="schoolLinkedIn"
+                  InputName="schoolLinkedIn"
                   placeholderText="Enter school's LinkedIn link here"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.linkedIn}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolLinkedIn}
                 />
               </div>
               <div className="w-full md:w-[48%]">
                 <FormInput
                   InputType="text"
                   Labelname="Facebook"
-                  InputId="facebook"
-                  InputName="facebook"
+                  InputId="schoolFacebook"
+                  InputName="schoolFacebook"
                   placeholderText="Enter school's Facebook link here"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.facebook}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolFacebook}
                 />
               </div>
               <div className="w-full md:w-[48%]">
@@ -211,9 +208,9 @@ export const AddSchoolsPage=()=> {
                   <select
                     id="schoolCategory"
                     name="schoolCategory"
-                    value={values.schoolCategory}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    value={formik.values.schoolCategory}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="border-2 border-primaryWhiteColor text-primaryWhiteColor rounded-md p-2 bg-primaryBlueColor"
                     required
                   >
@@ -224,65 +221,120 @@ export const AddSchoolsPage=()=> {
                       </option>
                     ))}
                   </select>
-                  {errors.schoolCategory && touched.schoolCategory && (
-                    <small className="text-primaryErrorMessage">
-                      {errors.schoolCategory}
-                    </small>
+                  {formik.errors.schoolCategory &&
+                    formik.touched.schoolCategory && (
+                      <small className="text-primaryErrorMessage">
+                        {formik.errors.schoolCategory}
+                      </small>
+                    )}
+                </div>
+              </div>
+              <div className="w-full md:w-[48%]">
+                <div className="flex flex-col items-start justify-start w-full h-full">
+                  <label
+                    htmlFor="schoolImage"
+                    className="font-medium text-xl text-primaryBlackColor"
+                  >
+                    School Image:
+                  </label>
+                  <input
+                    id="schoolImage"
+                    name="schoolImage"
+                    type="file"
+                    onChange={handleImageChange}
+                    onBlur={formik.handleBlur}
+                    className="border-2 border-primaryWhiteColor text-primaryWhiteColor rounded-md p-2 bg-primaryBlueColor w-full h-full"
+                  />
+                  {formik.errors.schoolImage &&
+                    formik.touched.schoolImage && (
+                      <small className="text-primaryErrorMessage">
+                        {formik.errors.schoolImage}
+                      </small>
+                    )}
+                  {imagePreview && (
+                   <div className="w-48 h-48 overflow-hidden object-cover">
+                     <img
+                      src={imagePreview}
+                      alt="School Preview"
+                      className="mt-2 w-full h-full hidden md:flex"
+                    />
+                   </div>
                   )}
                 </div>
               </div>
             </div>
-            <h1 className="font-semibold capitalize mt-2 text-primaryBlackColor text-2xl">
-              <span className="text-primaryBlueColor">0.2</span> About the
-              school
-            </h1>
-            <div className="flex flex-col md:flex-row justify-between">
-              <div className="w-full md:w-[48%]">
-                <TextArea
-                  Labelname="About"
-                  InputId="aboutSchool"
-                  InputName="aboutSchool"
-                  placeholderText="Give a brief description of the school"
-                  required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.aboutSchool}
-                />
-                {errors.aboutSchool && touched.aboutSchool && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.aboutSchool}
-                  </small>
-                )}
-              </div>
-              <div className="w-full md:w-[48%]">
-                <TextArea
-                  Labelname="Vision"
-                  InputId="schoolVision"
-                  InputName="schoolVision"
-                  placeholderText="Enter the school's vision"
-                  required="required"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.schoolVision}
-                />
-                {errors.schoolVision && touched.schoolVision && (
-                  <small className="text-primaryErrorMessage">
-                    {errors.schoolVision}
-                  </small>
-                )}
-              </div>
+            <div className="mt-4">
+              <TextArea
+                InputIcon={<FaMessage/>}
+                Labelname="About School"
+                InputId="schoolAbout"
+                InputName="schoolAbout"
+                placeholderText="Enter a brief description about the school here"
+                required="required"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.schoolAbout}
+              />
+              {formik.errors.schoolAbout && formik.touched.schoolAbout && (
+                <small className="text-primaryErrorMessage">
+                  {formik.errors.schoolAbout}
+                </small>
+              )}
             </div>
-            <Button
-              title="Register School"
-              backgroundColor="primaryBlueColor"
-              marginTop="4"
-              type="submit"
-            />
+            <div className="mt-4">
+              <TextArea
+                InputIcon={<FaSchool/>}
+                Labelname="School Vision"
+                InputId="schoolVision"
+                InputName="schoolVision"
+                placeholderText="Enter school's vision statement here"
+                required="required"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.schoolVision}
+              />
+              {formik.errors.schoolVision &&
+                formik.touched.schoolVision && (
+                  <small className="text-primaryErrorMessage">
+                    {formik.errors.schoolVision}
+                  </small>
+                )}
+            </div>
+            <div className="flex justify-end mt-4">
+              <Button
+                type="submit"
+                title="Submit School Details"
+                backgroundColor="primaryBlueColor"
+              />
+            </div>
+            {uploadingSchool && (
+              <p className="text-successColorCode text-sm md:text-xl">
+                {uploadingSchool}
+              </p>
+            )}
+            {error && (
+              <p className="text-primaryErrorMessage text-sm md:text-xl">
+                {error}
+              </p>
+            )}
+            {loading && (
+              <div className="loading-container flex items-center justify-center flex-col gap-1">
+                <p className="text-primaryBlackColor">
+                  Sending Article, Please Wait...
+                </p>
+                <BarLoader
+                  height={4}
+                  width={100}
+                  color="#87CEEB"
+                  loading={true}
+                />
+              </div>
+            )}
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default AddSchoolsPage;

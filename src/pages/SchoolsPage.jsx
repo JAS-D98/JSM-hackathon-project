@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Button from "../components/button/Button";
 import InputSection from "../components/InputSection/InputSection";
-import { aboutimage1 } from "../assets/images";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function SchoolsPage() {
   const [schools, setSchools] = useState([]);
   const [message, setMessage] = useState("");
   const handleFetch = async () => {
     try {
+      setLoading(true);
       const schoolUrl = "http://localhost:5000/api/schools-mine/schools";
       const schools = await axios.get(schoolUrl);
       console.log(schools);
@@ -77,83 +78,36 @@ export default function SchoolsPage() {
         <h1 className="text-primaryBlackColor font-bold text-xl md:text-2xl uppercase">
           Universities
         </h1>
-        <div className="mt-6 flex flex-col gap-3 md:gap-0 md:flex-row items-center flex-wrap justify-between">
-          <div className="bg-primaryBlueColor text-primaryWhiteColor w-full md:w-[24%] gap-2 flex flex-col rounded-xl shadow-xl">
-            <div className="overflow-hidden w-full h-36 object-cover rounded-tr-xl rounded-tl-xl">
-              <img
-                src={aboutimage1}
-                alt=""
-                className="w-full h-full object-cover"
-              />
+        <div className="mt-6 flex flex-col gap-3 md:gap-2 md:flex-row items-center flex-wrap justify-between">
+          {schools.map((school) => (
+            <div className="w-full md:w-[24%]">
+              <Link to={`/schools-section/${school.school_id}`} className="w-full" key={school.school_id}>
+                <div className="bg-primaryBlueColor text-primaryWhiteColor w-full flex flex-col rounded-xl shadow-xl">
+                  <div className="overflow-hidden w-full h-36 object-cover rounded-tr-xl rounded-tl-xl bg-primaryErrorMessage">
+                    <img
+                      src={school.school_image}
+                      alt={`image of ${school.school_name} school`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-2">
+                    <h1 className="uppercase font-semibold">
+                      {school.school_name}
+                    </h1>
+                    <div className="h-12 overflow-hidden">
+                      <p>{school.school_about}</p>
+                    </div>
+                    <p className="placeholder-opacity-80">
+                      Location:{" "}
+                      <span className="text-secondaryBlackColor capitalize">
+                        {school.school_location}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </div>
-            <div className="p-2">
-              <h1 className="uppercase font-semibold">Green Valley</h1>
-              <p>A place where learning meets excellence</p>
-              <p className="placeholder-opacity-80">
-                Location:{" "}
-                <span className="text-secondaryBlackColor">
-                  Kiharu Murang'a
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="bg-primaryBlueColor text-primaryWhiteColor w-full md:w-[24%] gap-2 flex flex-col rounded-xl shadow-xl">
-            <div className="overflow-hidden w-full h-36 object-cover rounded-tr-xl rounded-tl-xl">
-              <img
-                src={aboutimage1}
-                alt=""
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-2">
-              <h1 className="uppercase font-semibold">Green Valley</h1>
-              <p>A place where learning meets excellence</p>
-              <p className="placeholder-opacity-80">
-                Location:{" "}
-                <span className="text-secondaryBlackColor">
-                  Kiharu Murang'a
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="bg-primaryBlueColor text-primaryWhiteColor w-full md:w-[24%] gap-2 flex flex-col rounded-xl shadow-xl">
-            <div className="overflow-hidden w-full h-36 object-cover rounded-tr-xl rounded-tl-xl">
-              <img
-                src={aboutimage1}
-                alt=""
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-2">
-              <h1 className="uppercase font-semibold">Green Valley</h1>
-              <p>A place where learning meets excellence</p>
-              <p className="placeholder-opacity-80">
-                Location:{" "}
-                <span className="text-secondaryBlackColor">
-                  Kiharu Murang'a
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="bg-primaryBlueColor text-primaryWhiteColor w-full md:w-[24%] gap-2 flex flex-col rounded-xl shadow-xl">
-            <div className="overflow-hidden w-full h-36 object-cover rounded-tr-xl rounded-tl-xl">
-              <img
-                src={aboutimage1}
-                alt=""
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-2">
-              <h1 className="uppercase font-semibold">Green Valley</h1>
-              <p>A place where learning meets excellence</p>
-              <p className="placeholder-opacity-80">
-                Location:{" "}
-                <span className="text-secondaryBlackColor">
-                  Kiharu Murang'a
-                </span>
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

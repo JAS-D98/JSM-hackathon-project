@@ -21,6 +21,7 @@ import testimonialParent from "./testimonialParent.png";
 import coloredimage from "./coloredimage.png";
 import readingavatar from "./readingavatar.png";
 import lostavatar from "./lostavatar.png";
+import banner from "./banner.png";
 
 export {
   logo,
@@ -46,4 +47,5 @@ export {
   coloredimage,
   readingavatar,
   lostavatar,
+  banner,
 };

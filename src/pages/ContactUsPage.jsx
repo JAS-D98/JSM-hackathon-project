@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios'; 
+import axios from "axios";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaUserEdit } from "react-icons/fa";
 import FormInput from "../components/formInput/FormInput";
@@ -14,7 +14,7 @@ import {
 } from "react-icons/md";
 import { useFormik } from "formik";
 import { contactFormValidation } from "../formvalidations/ContactFormValidation.jsx";
-import { BarLoader } from 'react-spinners';
+import { BarLoader } from "react-spinners";
 
 const initialValues = {
   fname: "",
@@ -35,7 +35,10 @@ function ContactUsPage() {
       onSubmit: async (values) => {
         try {
           setLoading(true);
-          const response = await axios.post('http://localhost:5000/api/schools-mine/contacts', values);
+          const response = await axios.post(
+            "http://localhost:5000/api/schools-mine/contacts",
+            values,
+          );
           setSentMessage(response.data.data);
           setError("");
           setLoading(false);
@@ -52,7 +55,7 @@ function ContactUsPage() {
           setLoading(false);
           setTimeout(() => {
             setError("");
-          }, 5000); 
+          }, 5000);
         }
       },
     });
@@ -184,12 +187,22 @@ function ContactUsPage() {
               title="Send Us Your Message"
               backgroundColor="primaryBlueColor"
               type="submit"
-              />
-              {sentMessage && <p className="text-successColorCode text-sm md:text-xl">{sentMessage}</p>}
-              {error && <p className="text-primaryErrorMessage text-sm md:text-xl">{error}</p>}
-              {loading && (
-              <div className='loading-container'>
-                <p className='text-primaryBlackColor'>Submitting, Please Wait...</p>
+            />
+            {sentMessage && (
+              <p className="text-successColorCode text-sm md:text-xl">
+                {sentMessage}
+              </p>
+            )}
+            {error && (
+              <p className="text-primaryErrorMessage text-sm md:text-xl">
+                {error}
+              </p>
+            )}
+            {loading && (
+              <div className="loading-container">
+                <p className="text-primaryBlackColor">
+                  Submitting, Please Wait...
+                </p>
                 <BarLoader
                   height={4}
                   width={100}
