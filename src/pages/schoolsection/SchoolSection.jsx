@@ -13,12 +13,16 @@ const SchoolSection = () => {
   useEffect(() => {
     const fetchSchool = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/schools-mine/schools/${schoolId}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/schools-mine/schools/${schoolId}`,
+        );
         console.log(response.data.data);
         setSchool(response.data.data);
       } catch (error) {
         console.log(error.message);
-        setMessage("A problem occurred with the server. Please try again later.");
+        setMessage(
+          "A problem occurred with the server. Please try again later.",
+        );
       }
     };
 
@@ -69,18 +73,22 @@ const SchoolSection = () => {
         </div>
         <hr className="bg-primaryBlueColor h-1 rounded-xl mt-2" />
         <div className="flex justify-center gap-2 mt-[2%]">
-       
-         {school.school_facebook &&  
-         <a href={school.school_facebook} target="_blank" rel="noopener noreferrer">
-            <div className="flex flex-col flex-wrap items-center gap-2 bg-tertiaryBlueColor p-2 rounded">
-              <h2 className="text-primaryBlueColor capitalize md:text-xl font-semibold">
-                Facebook Profile
-              </h2>
-              <p className="text-2xl text-primaryBlueColor">
-                <FaFacebook />
-              </p>
-            </div>
-          </a>}
+          {school.school_facebook && (
+            <a
+              href={school.school_facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="flex flex-col flex-wrap items-center gap-2 bg-tertiaryBlueColor p-2 rounded">
+                <h2 className="text-primaryBlueColor capitalize md:text-xl font-semibold">
+                  Facebook Profile
+                </h2>
+                <p className="text-2xl text-primaryBlueColor">
+                  <FaFacebook />
+                </p>
+              </div>
+            </a>
+          )}
         </div>
       </div>
     </div>

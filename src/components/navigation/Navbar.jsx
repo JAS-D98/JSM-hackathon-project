@@ -31,7 +31,6 @@ function Navbar() {
       console.error("Logout failed:", error);
     }
   };
-  
 
   return (
     <div className="w-full fixed z-20">
@@ -77,7 +76,7 @@ function Navbar() {
               backgroundColor="bg-primary"
               border="border"
               marginTop="0"
-              onClick={handleLogout}
+              funcWord={handleLogout}
             />
           )}
         </div>

@@ -24,7 +24,7 @@ const SchoolsPage = () => {
         setMessage("No schools found at the moment");
       } else {
         const sortedSchools = response.data.data.sort((a, b) =>
-          a.school_name.localeCompare(b.school_name)
+          a.school_name.localeCompare(b.school_name),
         );
         setSchools(sortedSchools);
         setFilteredSchools(sortedSchools);
@@ -47,7 +47,7 @@ const SchoolsPage = () => {
       setFilteredSchools(schools);
     } else {
       const filtered = schools.filter(
-        (school) => school.school_category === category
+        (school) => school.school_category === category,
       );
       setFilteredSchools(filtered);
     }
@@ -64,7 +64,7 @@ const SchoolsPage = () => {
     } else {
       setSearchLoading(true);
       const filtered = schools.filter((school) =>
-        school.school_name.toLowerCase().includes(searchTerm.toLowerCase())
+        school.school_name.toLowerCase().includes(searchTerm.toLowerCase()),
       );
       setFilteredSchools(filtered);
       setSearchLoading(false);
@@ -80,7 +80,9 @@ const SchoolsPage = () => {
 
     return categories.map((category) => (
       <div key={category}>
-        {filteredSchools.some((school) => school.school_category === category) && (
+        {filteredSchools.some(
+          (school) => school.school_category === category,
+        ) && (
           <>
             <h2 className="text-primaryBlackColor font-bold text-xl md:text-2xl uppercase">
               {category}

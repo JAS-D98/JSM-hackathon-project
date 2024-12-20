@@ -48,14 +48,14 @@ const AddSchoolsPage = () => {
           schoolImage: schoolUrl,
         };
         try {
-          setLoading(true)
+          setLoading(true);
           const response = await axios.post(
             "http://localhost:5000/api/schools-mine/schools/",
-            formData
+            formData,
           );
           console.log("API Response:", response.data);
           setUploadingSchool(response.data.data);
-          setLoading(false)
+          setLoading(false);
           setError("");
           console.log(response.data);
         } catch (error) {
@@ -245,27 +245,26 @@ const AddSchoolsPage = () => {
                     onBlur={formik.handleBlur}
                     className="border-2 border-primaryWhiteColor text-primaryWhiteColor rounded-md p-2 bg-primaryBlueColor w-full h-full"
                   />
-                  {formik.errors.schoolImage &&
-                    formik.touched.schoolImage && (
-                      <small className="text-primaryErrorMessage">
-                        {formik.errors.schoolImage}
-                      </small>
-                    )}
+                  {formik.errors.schoolImage && formik.touched.schoolImage && (
+                    <small className="text-primaryErrorMessage">
+                      {formik.errors.schoolImage}
+                    </small>
+                  )}
                   {imagePreview && (
-                   <div className="w-48 h-48 overflow-hidden object-cover">
-                     <img
-                      src={imagePreview}
-                      alt="School Preview"
-                      className="mt-2 w-full h-full hidden md:flex"
-                    />
-                   </div>
+                    <div className="w-48 h-48 overflow-hidden object-cover">
+                      <img
+                        src={imagePreview}
+                        alt="School Preview"
+                        className="mt-2 w-full h-full hidden md:flex"
+                      />
+                    </div>
                   )}
                 </div>
               </div>
             </div>
             <div className="mt-4">
               <TextArea
-                InputIcon={<FaMessage/>}
+                InputIcon={<FaMessage />}
                 Labelname="About School"
                 InputId="schoolAbout"
                 InputName="schoolAbout"
@@ -283,7 +282,7 @@ const AddSchoolsPage = () => {
             </div>
             <div className="mt-4">
               <TextArea
-                InputIcon={<FaSchool/>}
+                InputIcon={<FaSchool />}
                 Labelname="School Vision"
                 InputId="schoolVision"
                 InputName="schoolVision"
@@ -293,12 +292,11 @@ const AddSchoolsPage = () => {
                 onChange={formik.handleChange}
                 value={formik.values.schoolVision}
               />
-              {formik.errors.schoolVision &&
-                formik.touched.schoolVision && (
-                  <small className="text-primaryErrorMessage">
-                    {formik.errors.schoolVision}
-                  </small>
-                )}
+              {formik.errors.schoolVision && formik.touched.schoolVision && (
+                <small className="text-primaryErrorMessage">
+                  {formik.errors.schoolVision}
+                </small>
+              )}
             </div>
             <div className="flex justify-end mt-4">
               <Button

@@ -95,8 +95,8 @@ export default function Footer() {
       </div>
 
       <a href="https://jasperwambuguport.netlify.app">
-        <p className="mt-1 items-center flex w-full justify-center">
-          <span className="text-secondaryBlackColor italic font-semibold">
+        <p className="mt-3 items-center flex w-full justify-center">
+          <span className="text-white italic font-semibold">
             Designer: Jasper Wambugu
           </span>
         </p>

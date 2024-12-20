@@ -1,4 +1,3 @@
-// App.js
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
@@ -14,6 +13,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/authentication/Login";
 import SignUp from "./pages/authentication/SignUp";
 import SchoolSection from "./pages/schoolsection/SchoolSection";
+import ProtectedRoutes from "./protectedroutes/ProtectedRoutes";
 
 export default function App() {
   return (
@@ -22,15 +22,20 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/schools-register" element={<AddSchoolsPage />} />
+            <Route path="/articles-write" element={<ArticlesPageWrite />} />
+          </Route>
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/schools" element={<SchoolsPage />} />
-          <Route path="/articles" element={<ArticlesPage />} />
-          <Route path="/articles-write" element={<ArticlesPageWrite />} />
+          <Route path="/articles" element={ <ArticlesPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="/schools-register" element={<AddSchoolsPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/schools-section/:schoolId" element={<SchoolSection />} />
+          <Route
+            path="/schools-section/:schoolId"
+            element={<SchoolSection />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
