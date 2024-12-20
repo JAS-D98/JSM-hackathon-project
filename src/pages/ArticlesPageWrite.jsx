@@ -8,7 +8,7 @@ import FormInput from "../components/formInput/FormInput";
 import { useFormik } from "formik";
 import { BarLoader } from "react-spinners";
 import axios from "axios";
-import { articleFormValidation } from "../formvalidations/ArticleFormValidation";
+import { articleFormValidation } from "../formvalidations/ArticleFormValidation.js";
 
 export default function ArticlesPageWrite() {
   const [loading, setLoading] = useState(false);
